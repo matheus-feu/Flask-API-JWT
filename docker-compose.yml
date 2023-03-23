@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  #  flaskapp:
+  #    - build: .
+  #      container_name: flask-app-container
+  #      command: python -u run.py
+  #      ports:
+  #        - 5000:5000
+  #      environment:
+  #        - MYSQL_HOST=mysql-flask-app-container
+  #        - MYSQL_DB=flaskapp
+  #        - MYSQL_USER=root
+  #        - MYSQL_PASSWORD=123456
+
+  mysql:
+    container_name: mysql-flask
+    image: mysql:latest
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
+    labels:
+      project: flaskapp
+      day: "22 March 2023"
+    ports:
+      - 3309:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=flaskapp
+      - MYSQL_USER=flask
+      - MYSQL_PASSWORD=admin
+
+volumes:
+  mysql-data:
+    name: mysql-data
+
+networks:
+  my-sql-python-app-network:
+    name: my-sql-python-app-network
