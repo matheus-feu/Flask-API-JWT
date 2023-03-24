@@ -5,8 +5,6 @@ services:
   mysql:
     container_name: mysql-flask
     image: mysql:latest
-    volumes:
-      - ./mysql:/var/lib/mysql
     restart: unless-stopped
     labels:
       project: flaskapp
@@ -14,10 +12,10 @@ services:
     ports:
       - 3309:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=flaskapp
-      - MYSQL_USER=flask
-      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD="suasenha"
+      - MYSQL_DATABASE="nomedobanco"
+      - MYSQL_USER="usuario"
+      - MYSQL_PASSWORD="banana"
 
 volumes:
   mysql-data:
