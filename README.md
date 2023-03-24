@@ -81,19 +81,36 @@ $ venv\Scripts\activate
 $ pip install -r requirements.txt
 ```
 
-- Execute o `docker-compose` para subir o banco de dados.
+- Não esqueça de configurar inserindo a senha e o usuário antes de executar o `docker-compose` para subir o banco de
+  dados.
+
+```bash
+ environment:
+      - MYSQL_ROOT_PASSWORD="suasenha"
+      - MYSQL_DATABASE="nomedobanco"
+      - MYSQL_USER="usuario"
+      - MYSQL_PASSWORD="banana"
+```
+
+- Suba o banco de dados no Docker
 
 ```bash
 $ docker-compose up -d
 ```
 
-- Execute o projeto
+- Execute a aplicação, ao executar a aplicação, o banco de dados será criado automaticamente.
 
 ```bash
-$ python app.py
+$ python run.py
 ```
 
 ## 📌 Endpoints
+
+
+Acesse a documentação da API no Swagger através do link: http://localhost:5000/docs, que ficará assim:
+
+![Swagger](https://imgur.com/b4B7e1P.png)
+
 
 O fluxo da API é um CRUD de usuários, basicamente:
 
@@ -112,10 +129,12 @@ O fluxo da API é um CRUD de usuários, basicamente:
 - Deletar um usuário cadastrado na rota `/users/<id>`, permitindo que o usuário autenticado possa deletar apenas o
   usuário que foi passado o id.
 
+  
 ## 📚 Bibliotecas
 
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
+- [Flasgger](https://flasgger.readthedocs.io/en/latest/)
 - [PyJWT](https://pyjwt.readthedocs.io/en/stable/)
 - [Marshmallow](https://marshmallow.readthedocs.io/en/stable/)
 - [MySqlClient](https://pypi.org/project/mysqlclient/)
