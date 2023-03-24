@@ -3,7 +3,7 @@ import datetime
 from app import db, ma
 
 
-class UsersModel(db.Model):
+class UserModel(db.Model):
     """Definição da classe/tabela que representa os usuários no banco de dados."""
     __tablename__ = 'users'
 
@@ -15,7 +15,7 @@ class UsersModel(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
-    def __init__(self, username, password, name, email):
+    def __init__(self, username, password=None, name=None, email=None):
         self.username = username
         self.password = password
         self.name = name
@@ -26,12 +26,12 @@ class UsersModel(db.Model):
 
     def validate_username_exists(self) -> object:
         """Verifica se o usuário já existe no banco de dados."""
-        username = UsersModel.query.filter_by(username=self.username).first()
+        username = UserModel.query.filter_by(username=self.username).first()
         return username
 
     def validate_email_exists(self) -> object:
         """Verifica se o email já existe no banco de dados."""
-        email = UsersModel.query.filter_by(email=self.email).first()
+        email = UserModel.query.filter_by(email=self.email).first()
         return email
 
     def save_user(self):

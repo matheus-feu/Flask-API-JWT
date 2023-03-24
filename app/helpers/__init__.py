@@ -1,7 +1,10 @@
-import random
-import string
+import secrets
 
 
-def random_string():
-    """Gera uma string aleatória para ser usada como chave secreta."""
-    return ''.join(random.choice(string.ascii_letters + string.digits + string.ascii_uppercase) for _ in range(12))
+def generate_hash_new():
+    """Gera um hash aleatório de 32 caracteres hexadecimais,
+    em um arquivo chamado 'hash.txt'. ao executar o aplicativo,
+    usado na SECRET_KEY para geração do token de autenticação"""
+
+    with open('hash.txt', 'w') as file:
+        file.write(secrets.token_hex(nbytes=16))
