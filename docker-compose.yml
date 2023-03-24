@@ -1,21 +1,40 @@
 version: '3.7'
 
 services:
+  app:
+    build: .
+    container_name: flask_cntr
+    command: python -u run.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/flask-app
+    environment:
+      - DB_HOST=mysql-flask
+      - DB_PORT=3306
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   mysql:
     container_name: mysql-flask
     image: mysql:latest
-    restart: unless-stopped
     labels:
       project: flaskapp
       day: "22 March 2023"
     ports:
       - 3309:3306
     environment:
-      - MYSQL_ROOT_PASSWORD="suasenha"
-      - MYSQL_DATABASE="nomedobanco"
-      - MYSQL_USER="usuario"
-      - MYSQL_PASSWORD="banana"
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=flaskapp
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=${MYSQL_ROOT_PASSWORD} --execute \"SHOW DATABASES;\""
+      timeout: 45s
+      interval: 10s
+      retries: 10
 
 volumes:
   mysql-data:
