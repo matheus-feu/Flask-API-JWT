@@ -1,0 +1,67 @@
+tags:
+  - User
+
+summary: "Criar usuário"
+description: "Criar o usuário para realizar a autenticação no sistema."
+operationId: "createUser"
+
+produces:
+  - "application/json"
+
+parameters:
+  - in: "body"
+    name: "body"
+    description: "Campo para criar um usuário."
+    required: true
+    schema:
+      $ref: "#/definitions/createuser"
+
+
+responses:
+  "200":
+    description: "Usuário criado com sucesso."
+    schema:
+      example:
+        {
+          "data": {
+            "email": "havokz.@email.com",
+            "id": 4,
+            "name": "matheus",
+            "password": "pbkdf2:sha256:260000$jgJlnKEzwbGRWpPC$8d692b6eb71464da45e1844a48da340da66a917d25e682f0a9f3a2471cef63e8",
+            "username": "havokzbr"
+          },
+          "message": "Usuário havokzbr criado com sucesso."
+        }
+
+  "409":
+    description: "username/email já existe"
+    schema:
+      example:
+        {
+          "error": "O email havokz.flask@email.com já existe."
+        }
+
+  "401":
+    description: "Não autorizado - O token JWT é inválido ou expirou"
+    schema:
+      example:
+        {
+          'message': 'Token is missing!'
+        }
+
+definitions:
+  createuser:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: ""
+      name:
+        type: "string"
+        example: ""
+      email:
+        type: "string"
+        example: ""
+      password:
+        type: "string"
+        example: ""

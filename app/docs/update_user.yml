@@ -1,0 +1,74 @@
+tags:
+  - User
+
+summary: "Atualizar usuário"
+description: "Atualizar o usuário com o ID informado."
+operationId: "updateUser"
+
+produces:
+  - "application/json"
+
+parameters:
+  - name: "ID"
+    in: "path"
+    description: "ID do usuário a ser atualizado."
+    required: true
+    type: "integer"
+  - in: "body"
+    name: "body"
+    type: "string"
+    description: "Atualizar o usuário com o ID informado."
+    required: true
+    schema:
+      $ref: "#/definitions/updateuser"
+
+
+responses:
+
+  "200":
+    description: "successful operation"
+    schema:
+      example:
+        {
+          "data": {
+            "email": "havokz.flask@email.com",
+            "id": 3,
+            "name": "matheusfeu",
+            "password": "pbkdf2:sha256:260000$8mBddyLgcpjELJ4V$240ade6e0efdf8c7a14d0dc59893ba9ec56a01b6b4a62d65cd7d939f91829606",
+            "username": "havokz"
+          },
+          "message": "Usuário havokz atualizado com sucesso."
+        }
+
+  "404":
+    description: "Usuário com o ID informado não existe"
+    schema:
+      example:
+        {
+          "error": "O usuário não existe."
+        }
+
+  "401":
+    description: "Não autorizado - O token JWT é inválido ou expirou"
+    schema:
+      example:
+        {
+          'message': 'Token is missing!'
+        }
+
+definitions:
+  updateuser:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: ""
+      name:
+        type: "string"
+        example: ""
+      email:
+        type: "string"
+        example: ""
+      password:
+        type: "string"
+        example: ""

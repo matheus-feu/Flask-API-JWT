@@ -1,0 +1,29 @@
+tags:
+  - Bem-vindo(a)
+
+summary: "Rota de boas vindas"
+description: "Rota que retorna uma mensagem de boas vindas ao presente usuário(a) logado(a), necessária a autenticação JWT."
+
+produces:
+  - application/json
+
+parameters: []
+
+responses:
+
+  200:
+    description: Mensagem de boas vindas
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Olá seja bem vindo à API <username> !"
+
+  "401":
+    description: "Não autorizado - O token JWT é inválido ou expirou"
+    schema:
+      example:
+        {
+          'message': 'Token is missing!'
+        }

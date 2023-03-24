@@ -1,0 +1,48 @@
+tags:
+  - User
+
+summary: "Autenticar usuário"
+description: "Será necessário passar o username e senha cadastrado para obter o token de acesso."
+operationId: "authUser"
+
+produces:
+  - application/json
+
+parameters:
+  - name: username
+    required: true
+    in: query
+    type: string
+  - name: password
+    required: true
+    in: query
+    type: string
+
+responses:
+    200:
+        description: "Autenticado com sucesso"
+        schema:
+          type: string
+          example:
+            {
+              "message": "Token gerado com sucesso!",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjgwNTU2MjA4LCJpYXQiOjE2Nzk2OTIyMDgsInVzZXJuYW1lIjoiaGF2b2t6In0.E8GDoLYURK3mnP42qGnn4Ca-3k957ESgVc1GUa3KKYA"
+            }
+
+    400:
+        description: "Caso o usuário não seja encontrado"
+        schema:
+            type: string
+            example:
+              {
+                "message": "Não autorizado - O token JWT é inválido ou expirou"
+              }
+
+    401:
+        description: "Autorização necessária"
+        schema:
+            type: string
+            example:
+              {
+                "message": "Usuário e senha são obrigatórios"
+              }

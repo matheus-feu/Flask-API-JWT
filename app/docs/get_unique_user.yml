@@ -1,0 +1,48 @@
+tags:
+  - User
+
+summary: "Obter usuário único"
+description: "O ID do usuário que precisa ser obtido, localize o ID do usuário no endpoint de listar usuários."
+
+produces:
+  - "application/json"
+
+parameters:
+  - name: "ID"
+    in: "path"
+    description: "ID do usuário a ser obtido."
+    required: true
+    type: "integer"
+
+responses:
+
+  "200":
+    description: "Usuário obtido"
+    schema:
+      example:
+        {
+          "data": {
+            "email": "havokz.flask@email.com",
+            "id": 3,
+            "name": "matheus",
+            "password": "pbkdf2:sha256:260000$El3JRzKokvHWG61Y$8e2e318e57f415a98ec61c1126dc78ddc78281daa93358eca6a61e8c79d532d0",
+            "username": "havokz"
+          },
+          "message": "Usuário havokz retornado com sucesso."
+        }
+
+  "404":
+    description: "ID não encontrado"
+    schema:
+      example:
+        {
+          "message": "O usuário não encontrado"
+        }
+
+  "401":
+    description: "Não autorizado - O token JWT é inválido ou expirou"
+    schema:
+      example:
+        {
+          'message': 'Token is missing!'
+        }
