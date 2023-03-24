@@ -19,7 +19,7 @@ def authentication():
 
     # Valida se o usuário e senha foram passados
     if not auth or not auth.username or not auth.password:
-        return ({'message': 'Não foi possível verificar, necessário realizar o login'}), HTTPStatus.UNAUTHORIZED
+        return ({'message': 'Usuário e senha são obrigatórios'}), HTTPStatus.UNAUTHORIZED
 
     # Valida se o usuário existe
     user = UserModel.query.filter_by(username=auth.get('username')).first()
