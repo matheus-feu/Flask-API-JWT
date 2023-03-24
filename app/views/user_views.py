@@ -87,10 +87,6 @@ def update_user(id):
 
         success_msg = f'Usuário {user.username} atualizado com sucesso.'
         return ({'message': success_msg, 'data': result}), HTTPStatus.OK
-
-    except IntegrityError:
-        conflict_msg = f'O usuário {username} já existe.'
-        return ({'error': conflict_msg}), HTTPStatus.CONFLICT
     except:
         error_msg = f'Ocorreu um erro ao atualizar o usuário {username}.'
         return ({'error': error_msg}), HTTPStatus.INTERNAL_SERVER_ERROR
@@ -100,6 +96,9 @@ def delete_user(id):
     """Deleta um usuário através do id(pk) com o método DELETE."""
 
     user = UserModel.query.get(id)
+
+    if not user:
+        return ({'error': f'O usuário que contém esse ID:{id} não existe.'}), HTTPStatus.NOT_FOUND
 
     try:
         user.delete_user()

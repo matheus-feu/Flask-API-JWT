@@ -24,6 +24,10 @@ class UserModel(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+    def create_db(self):
+        """ Cria o banco de dados."""
+        db.create_all()
+
     def validate_username_exists(self) -> object:
         """Verifica se o usuário já existe no banco de dados."""
         username = UserModel.query.filter_by(username=self.username).first()
