@@ -93,37 +93,26 @@ $ docker-compose up -d
 $ python app.py
 ```
 
-É necessário criar o banco de dados, para isso, execute o seguinte comando:
-
-- Anote ai, a senha banco de dados é **`admin`**. e o usuário é **`root`**, claro que você pode alterar no arquivo
-  `docker-compose.yml` e no arquivo `app.py`, fica a seu critério.
-
-```bash
-from app import app
-from app import db
-db.create_all()
-```
-
 ## 📌 Endpoints
 
 O fluxo da API é um CRUD de usuários, basicamente:
 
 - Cadastro de usuário na rota `/user/create`, permitindo que o usuário se autentique na API e tenha acesso aos demais
   endpoints.
-- Ao se cadastrar, realizar a autenticação na rota `/auth`, gerando um token JWT que será utilizado para as demais requisições.
-- Com o token em mãos, autentique-se e poderá listar todos os usuários cadastrados na rota `/users`, permitindo que o usuário autenticado possa visualizar todos os
+- Ao se cadastrar, realizar a autenticação na rota `/auth`, gerando um token JWT que será utilizado para as demais
+  requisições.
+- Com o token em mãos, autentique-se e poderá listar todos os usuários cadastrados na rota `/users`, permitindo que o
+  usuário autenticado possa visualizar todos os
   usuários cadastrados.
-- Listar apenas um usuário cadastrado na rota `/users/<id>`, permitindo que o usuário autenticado possa visualizar apenas
- o usuário que foi passado o id.
+- Listar apenas um usuário cadastrado na rota `/users/<id>`, permitindo que o usuário autenticado possa visualizar
+  apenas
+  o usuário que foi passado o id.
 - Aualizar um usuário cadastrado na rota `/users/<id>`, permitindo que o usuário autenticado possa atualizar apenas o
   usuário que foi passado o id.
 - Deletar um usuário cadastrado na rota `/users/<id>`, permitindo que o usuário autenticado possa deletar apenas o
   usuário que foi passado o id.
 
-
-
 ## 📚 Bibliotecas
-
 
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
